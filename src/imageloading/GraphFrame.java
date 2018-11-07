@@ -43,10 +43,9 @@ private class DoButtons implements ActionListener {
 		if(returnvalue == JFileChooser.APPROVE_OPTION) {
 			File file = chooser.getSelectedFile();
 			String picturename = file.getAbsolutePath();
-			System.out.println(picturename);
-			Image img = new ImageIcon(picturename).getImage();
-			pictureLabel.setIcon(new ImageIcon(img));
-			theMap.put(thename.getText(), file);
+			ImageIcon img = new ImageIcon(picturename);
+			pictureLabel.setIcon(img);
+			theMap.put(thename.getText(), img);
 			imageModel.addElement(thename.getText());
 		}
 		thename.setText(null);
@@ -74,7 +73,13 @@ public GraphFrame() {
 	
 	imagelist.addListSelectionListener(new ListSelectionListener() {
 		public void valueChanged(ListSelectionEvent e) {
+			int index = imagelist.getSelectedIndex();
+			String picturename = imageModel.get(index);
 			
+			pictureLabel.setIcon((Icon) theMap.get(picturename));
+			
+			
+
 		}	
 	});
 	
